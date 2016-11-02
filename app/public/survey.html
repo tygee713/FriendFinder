@@ -8,7 +8,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </head>
 <body>
-  <div class = "container-fluid">
+  <div class = "container-fluid" id="main">
     <div class="form-group">
       <label for="name"><h3>Your name:</h3></label>
       <textarea class="form-control" id="name" rows="1"></textarea>
@@ -90,7 +90,7 @@
         <option>5</option>
       </select>
 
-       <label for="q9"><h4></h4></label>
+       <label for="q9"><h4>How much do you like reading books?</h4></label>
       <select class="form-control" id="q9">
         <option>1</option>
         <option>2</option>
@@ -99,7 +99,7 @@
         <option>5</option>
       </select>
 
-       <label for="q10"><h4></h4></label>
+       <label for="q10"><h4>How important is fashion and appearance to you?</h4></label>
       <select class="form-control" id="q10">
         <option>1</option>
         <option>2</option>
@@ -113,28 +113,30 @@
   </div>
 
   <script type='text/javascript'>
-    var newFriend = {
-      name: $('#name').val().trim(),
-      pictureURL: $('#picture').val().trim(),
-      answers: [
-        $('#q1').val(),
-        $('#q2').val(),
-        $('#q3').val(),
-        $('#q4').val(),
-        $('#q5').val(),
-        $('#q6').val(),
-        $('#q7').val(),
-        $('#q8').val(),
-        $('#q9').val(),
-        $('#q10').val()
-      ]
-    }
+    $('#submit').on('click', function() {
+      var newFriend = {
+        name: $('#name').val().trim(),
+        pictureURL: $('#picture').val().trim(),
+        answers: [
+          $('#q1').val(),
+          $('#q2').val(),
+          $('#q3').val(),
+          $('#q4').val(),
+          $('#q5').val(),
+          $('#q6').val(),
+          $('#q7').val(),
+          $('#q8').val(),
+          $('#q9').val(),
+          $('#q10').val()
+        ]
+      }
 
-    $.post(window.location.href + '/api/friends', newFriend, function(data) {
-      body.append('<p>Your Match is: ' + data.name + '</p>');
-      body.append('<img src="' + data.pictureURL + '">');
+      $.post(window.location.href.replace('/survey', '/api/friends'), newFriend, function(data) {
+        console.log(data);
+        $('#main').append('<br/><h2>Your Match is: ' + data.name + '</h2>');
+        $('#main').append('<img src="' + data.pictureURL + '">');
+      });
     });
-
   </script>
 </body>
 </html>
