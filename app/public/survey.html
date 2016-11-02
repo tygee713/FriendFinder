@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Friend Finder</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class = "container-fluid">
+    <div class="form-group">
+      <label for="name"><h3>Your name:</h3></label>
+      <textarea class="form-control" id="name" rows="1"></textarea>
+
+      <label for="picture"><h3>Link to your picture:</h3></label>
+      <textarea class="form-control" id="picture" rows="1"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="q1"><h4>How much do political ideas influence your relationships?</h4></label>
+      <select class="form-control" id="q1">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+
+      <label for="q2"><h4>What do you think of a night in with some wine or beer?</h4></label>
+      <select class="form-control" id="q2">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+
+      <label for="q3"><h4>How much do you like outdoor adventures?</h4></label>
+      <select class="form-control" id="q3">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+
+      <label for="q4"><h4>How much do you like playing video games?</h4></label>
+      <select class="form-control" id="q4">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+
+      <label for="q5"><h4>How likely would you be to go out for a night of clubbing?</h4></label>
+      <select class="form-control" id="q5">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+
+      <label for="q6"><h4>How much do your religious beliefs influence your decisions?</h4></label>
+      <select class="form-control" id="q6">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+
+      <label for="q7"><h4>How willing are you to spend money on a daily basis?</h4></label>
+      <select class="form-control" id="q7">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+
+       <label for="q8"><h4>How big of a sports fan are you?</h4></label>
+      <select class="form-control" id="q8">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+
+       <label for="q9"><h4></h4></label>
+      <select class="form-control" id="q9">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+
+       <label for="q10"><h4></h4></label>
+      <select class="form-control" id="q10">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+    </div>
+
+    <button class='btn btn-default' id='submit'>Submit</button>
+  </div>
+
+  <script type='text/javascript'>
+    var newFriend = {
+      name: $('#name').val().trim(),
+      pictureURL: $('#picture').val().trim(),
+      answers: [
+        $('#q1').val(),
+        $('#q2').val(),
+        $('#q3').val(),
+        $('#q4').val(),
+        $('#q5').val(),
+        $('#q6').val(),
+        $('#q7').val(),
+        $('#q8').val(),
+        $('#q9').val(),
+        $('#q10').val()
+      ]
+    }
+
+    $.post(window.location.href + '/api/friends', newFriend, function(data) {
+      body.append('<p>Your Match is: ' + data.name + '</p>');
+      body.append('<img src="' + data.pictureURL + '">');
+    });
+
+  </script>
+</body>
+</html>
